@@ -119,7 +119,7 @@ h1, h2 {
 #flight-list .flight {
   line-height: 1.5em;
   background: #eee;
-  width: 640px;
+  width: 780px;
   margin-bottom: 1px;
 }
 
@@ -130,6 +130,12 @@ h1, h2 {
 #flight-list .flight div {
   display: inline-block;
   width: 100px;
+}
+
+#flight-list div.origin,
+#flight-list div.destination {
+	width: 160px;
+	padding-right: 10px;
 }
 
 #flight-list div.distance,
@@ -154,21 +160,27 @@ aside {
 
 <div id="body">
 
-<a href="https://github.com/square"><img src="logotype.png" width="122" height="31"></a>
+<h1>Tesseract for Zugmonitor</h1>
 
-<h1>Tesseract</h1>
+<p>
+	This demo applies the concept from <a href="http://square.github.com/tesseract/">Tesseract Airline on-time performance</a> to the train data of <a href="http://zugmonitor.sueddeutsche.de/">Zugmonitor</a>. Zugmonitor is an application that provides data about delays in the Germany Railways.
+</p>
 
-<h2>Fast Multidimensional Filtering for Coordinated Views</h2>
+<p>
+	All of this is open source, so if you want to try tesseract on your own data, I recommend to <a href="https://github.com/square/tesseract/tree/gh-pages">fork the original example</a>.
+	If you should be interested in my code for converting the Zugmonitor data into CSV, just contact me on <a href="http://twitter.com/sebastianspier">Twitter</a> and I will publish it as well.
+</p>
 
-<p><b>Tesseract</b> is a <a href="https://github.com/square/tesseract">JavaScript library</a> for filtering large multivariate datasets in the browser. Tesseract supports extremely fast (&lt;30ms) interaction with coordinated views, even with datasets containing a million or more records; we built it to power analytics for <a href="https://squareup.com/register">Square Register</a>, allowing merchants to slice and dice their payment history fluidly.
+<p>
+	Credits go to <a href="http://squareup.com">Square, Inc.</a> for open sourcing Tesseract and to <a href="http://www.opendatacity.de">OpenDataCity</a> for developing Zugmonitor and for making the data available.
+</p>
 
-<p>Since most interactions only involve a single dimension, and then only small adjustments are made to the filter values, incremental filtering and reducing is significantly faster than starting from scratch. Tesseract uses sorted indexes (and a few bit-twiddling hacks) to make this possible, dramatically increasing the perfor&shy;mance of live histograms and top-<i>K</i> lists. For more details on how Tesseract works, see the <a href="https://github.com/square/tesseract/wiki/API-Reference">API reference</a>.
+<h2>Example: Train on-time performance</h2>
 
-<h2>Example: Airline on-time performance</h2>
+<p>The coordinated visualizations below (built with <a href="http://mbostock.github.com/d3/">D3</a>) show nearly 60,000 train connections from early 2012 (data courtesy of <a href="http://www.opendatacity.de">OpenDataCity</a>). The dataset is 2.5MB, so it might take a few seconds to download. Click and drag on any chart to filter by the associated dimension. The table beneath shows the eighty most recent trains that match the current filters; these are the <i>details on demand</i>, anecdotal evidence you can use to weigh different hypotheses.
 
-<p>The coordinated visualizations below (built with <a href="http://mbostock.github.com/d3/">D3</a>) show nearly a quarter-million flights from early 2001: part of the <a href="http://stat-computing.org/dataexpo/2009/">ASA Data Expo</a> dataset. The dataset is 5.3MB, so it might take a few seconds to download. Click and drag on any chart to filter by the associated dimension. The table beneath shows the eighty most recent flights that match the current filters; these are the <i>details on demand</i>, anecdotal evidence you can use to weigh different hypotheses.
+<p>Some interesting views to explore: How does time-of-day correlate with <a href="javascript:filter([null, [0, 150], null, null])">arrival delay</a>? Are <a href="javascript:filter([null, null, [600, 800], null])">longer</a> or <a href="javascript:filter([null, null, [0, 300], null])">shorter</a> train rides more likely to arrive early? How do flight patterns differ between <a href="javascript:filter([[4, 7], null, null, null])">mornings</a> and <a href="javascript:filter([[21, 24], null, null, null])">nights</a>?
 
-<p>Some interesting views to explore: How does time-of-day correlate with <a href="javascript:filter([null, [100, 150], null, null])">arrival delay</a>? Are <a href="javascript:filter([null, null, [1700, 2000], null])">longer</a> or <a href="javascript:filter([null, null, [0, 300], null])">shorter</a> flights more likely to arrive early? What happened on <a href="javascript:filter([null, [80, 150], null, [new Date(2001, 0, 12), new Date(2001, 0, 13)]])">January 12</a>? How do flight patterns differ between <a href="javascript:filter([null, null, null, [new Date(2001, 0, 27), new Date(2001, 0, 29)]])">weekends</a> and <a href="javascript:filter([null, null, null, [new Date(2001, 0, 29), new Date(2001, 1, 3)]])">weekdays</a>, or <a href="javascript:filter([[4, 7], null, null, null])">mornings</a> and <a href="javascript:filter([[21, 24], null, null, null])">nights</a>? Feel free to <a href="https://github.com/square/tesseract/tree/gh-pages">fork this example</a> and try your own data!
 
 <div id="charts">
   <div id="hour-chart" class="chart">
@@ -178,14 +190,14 @@ aside {
     <div class="title">Arrival Delay (min.)</div>
   </div>
   <div id="distance-chart" class="chart">
-    <div class="title">Distance (mi.)</div>
+    <div class="title">Distance (km.)</div>
   </div>
   <div id="date-chart" class="chart">
     <div class="title">Date</div>
   </div>
 </div>
 
-<aside id="totals"><span id="active">-</span> of <span id="total">-</span> flights selected.</aside>
+<aside id="totals"><span id="active">-</span> of <span id="total">-</span> trains selected.</aside>
 
 <div id="lists">
   <div id="flight-list" class="list"></div>
@@ -195,19 +207,17 @@ aside {
   <span style="float:right;">
     Released under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License 2.0</a>.
   </span>
-  Copyright 2012 <a href="http://squareup.com">Square, Inc.</a>
+  Copyright 2012 <a href="http://twitter.com/sebastianspier">Sebastian Spier</a>
 </footer>
 
 </div>
-
-<a href="https://github.com/square/tesseract"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
 
 <script src="tesseract.v0.js"></script>
 <script src="d3.v2.js"></script>
 <script>
 
 // (It's CSV, but GitHub Pages only gzip's JSON at the moment.)
-d3.csv("flights-3m.json", function(flights) {
+d3.csv("trains.json", function(flights) {
 
   // Various formatters.
   var formatNumber = d3.format(",d"),
@@ -267,9 +277,9 @@ d3.csv("flights-3m.json", function(flights) {
         .group(dates)
         .round(d3.time.day.round)
       .x(d3.time.scale()
-        .domain([new Date(2001, 0, 1), new Date(2001, 3, 1)])
+        .domain([new Date(2012, 0, 1), new Date(2012, 3, 1)])
         .rangeRound([0, 10 * 90]))
-        .filter([new Date(2001, 1, 1), new Date(2001, 2, 1)])
+        .filter([new Date(2012, 1, 1), new Date(2012, 2, 1)])
 
   ];
 
@@ -304,7 +314,7 @@ d3.csv("flights-3m.json", function(flights) {
 
   // Like d3.time.format, but faster.
   function parseDate(d) {
-    return new Date(2001,
+    return new Date(2012,
         d.substring(0, 2) - 1,
         d.substring(2, 4),
         d.substring(4, 6),
@@ -356,7 +366,7 @@ d3.csv("flights-3m.json", function(flights) {
 
       flightEnter.append("div")
           .attr("class", "distance")
-          .text(function(d) { return formatNumber(d.distance) + " mi."; });
+          .text(function(d) { return formatNumber(d.distance) + " km."; });
 
       flightEnter.append("div")
           .attr("class", "delay")
