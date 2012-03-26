@@ -2,7 +2,7 @@
 
 # WARNING
 
-If you are looking for Tesseract by Square, please check the [original repository](ttps://github.com/square/tesseract). I have only forked that repository to work on the [gh-pages][] branch, so that I could get the [demo site](http://spier.hu/tesseract) up and running quickly.
+If you are looking for Tesseract by Square, please check the [original repository](https://github.com/square/tesseract). I have only forked that repository to work on the [gh-pages][] branch, so that I could get the [demo site](http://spier.hu/tesseract) up and running quickly.
 
 This repository here contains the ruby code for converting the data from Zugmonitor into the CSV format that needed by the [demo site](http://spier.hu/tesseract).
 

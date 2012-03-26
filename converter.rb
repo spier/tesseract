@@ -28,9 +28,7 @@ end
 
 def calculation_distance(s1,s2)
   km = Haversine.distance(s1["lat"], s1["lon"], s2["lat"], s2["lon"]);
-  #puts "#{s1["name"]} => #{s2["name"]}: #{km}"
   km = sprintf('%.0f', km)
-  #puts "#{s1["name"]} => #{s2["name"]}: #{km}"
 end
 
 # ---------------------------------------------
