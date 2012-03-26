@@ -1,6 +1,8 @@
 # Tesseract for Zugmonitor
 
-WARNING: If you are looking for Tesseract by Square, please check the [original repository](ttps://github.com/square/tesseract). I have only forked that repository to work on the [gh-pages][] branch, so that I could get the [demo site](http://spier.hu/tesseract) up and running quickly.
+# WARNING
+
+If you are looking for Tesseract by Square, please check the [original repository](ttps://github.com/square/tesseract). I have only forked that repository to work on the [gh-pages][] branch, so that I could get the [demo site](http://spier.hu/tesseract) up and running quickly.
 
 This repository here contains the ruby code for converting the data from Zugmonitor into the CSV format that needed by the [demo site](http://spier.hu/tesseract).
 
@@ -8,14 +10,13 @@ This repository here contains the ruby code for converting the data from Zugmoni
 
 1. Create a folder **input_data**
 
-1. Download some data from the [Zugmonitor API][] and save it in folder **input_data**. e.g. this
+1. Download some data from the [Zugmonitor API][] and save it in folder **input_data**. e.g. this is how I downloaded the data for January - March 2012:
 
 		curl "http://zugmonitor.sueddeutsche.de/api/trains/2012-0[1-3]-0[1-9]" -o 2012-0#1-0#2.json
 		curl "http://zugmonitor.sueddeutsche.de/api/trains/2012-0[1-3]-[10-31]" -o 2012-0#1-#2.json
-	
-Then clean up the files that are empty (as e.g. the date 2012-02-31 does does not exist).
 
-1. run converter
+1. run converter => will create file **trains.csv**
+
 		bundle install
 		ruby converter.rb
 	
