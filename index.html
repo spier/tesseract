@@ -171,8 +171,20 @@ aside {
 	If you should be interested in my code for converting the Zugmonitor data into CSV, just contact me on <a href="http://twitter.com/sebastianspier">Twitter</a> and I will publish it as well.
 </p>
 
-<p>
-	Credits go to <a href="http://squareup.com">Square, Inc.</a> for open sourcing Tesseract and to <a href="http://www.opendatacity.de">OpenDataCity</a> for developing Zugmonitor and for making the data available.
+<h2>Credits</h2>
+
+<p>	
+	<ul>
+		<li>
+			<a href="https://github.com/square/tesseract">Tesseract</a> JavaScript library for filtering large multivariate datasets in the browser, and example implementation <a href="http://square.github.com/tesseract/">Airline on-time performance</a>, both implemented by <a href="http://squareup.com">Square, Inc.</a>
+		</li>
+		<li>
+			Visualizations built with <a href="http://mbostock.github.com/d3/">D3</a>
+		</li>
+		<li>
+			<a href="http://zugmonitor.sueddeutsche.de/">Zugmonitor</a> data provided by <a href="http://www.opendatacity.de">OpenDataCity</a>
+		</li>
+	</ul>	
 </p>
 
 <h2>Example: Train on-time performance</h2>
@@ -572,4 +584,17 @@ d3.csv("trains.json", function(flights) {
   }
 });
 
+</script>
+
+<!-- google analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30332444-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
